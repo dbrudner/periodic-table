@@ -8,14 +8,9 @@ const TableContainer = styled.div`
 	border: 1px solid black;
 `
 
-const Row = styled.div`
+const Column = styled.div`
 	display: flex;
-	justify-content: space-between;
-`
-
-const Block = styled.div`
-	display: flex;
-	justify-content: space-between;
+	flex-direction: column;
 `
 
 export default props => {
@@ -26,53 +21,30 @@ export default props => {
 	console.log(elements);
 	// The dopest function I've ever written
 	const columns = elements.reduce((acc, element, i) => {
-		const column = 15 - (15 - i);
+		const column = 15 - (15/Math.ceil(i + 15));
+		console.log(column);
 		if (!acc || !acc[column]) return acc;
 		acc[column].push(element);
 		return acc;
 	}, Array(15).fill([]))
 
-	console.log(columns);
+
+	const renderColumns = () => {
+		return columns.map(column => {
+			return (
+				<Column>
+					{column.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)}
+				</Column>
+			)
+		})
+	}
 
 	const renderElementsBlock = elements => elements.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)
 
 	return (
 		<div>
 			<TableContainer>
-				<Row>
-					<Block>
-						<Element openDetailedView={props.openDetailedView} element={elements[0]} />
-					</Block>
-					<Block>
-						<Element openDetailedView={props.openDetailedView} element={elements[1]} />
-					</Block>
-				</Row>
-				<Row>
-					<Block>
-						{renderElementsBlock([...elements.slice(2, 4)])}
-					</Block>
-					<Block>
-						{renderElementsBlock([...elements.slice(4, 10)])}
-					</Block>
-				</Row>
-				<Row>
-					<Block>
-						{renderElementsBlock([...elements.slice(10, 12)])}
-					</Block>
-					<Block>
-						{renderElementsBlock([...elements.slice(12, 18)])}
-					</Block>
-				</Row>
-				<Row>
-					<Block>
-						{renderElementsBlock([...elements.slice(19, 36)])}
-					</Block>
-				</Row>
-				<Row>
-					<Block>
-						{renderElementsBlock([...elements.slice(37, 54)])}
-					</Block>
-				</Row>
+				{renderColumns()}
 			</TableContainer>
 			{/* <div style={{marginTop: "50px"}}>
 				{twoRowElements.map(element => <Element twoRow element={element} />)}
