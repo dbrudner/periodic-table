@@ -34,6 +34,7 @@ export default props => {
 		height: ${props => `calc(100vw/18 - ${props.smallScreen ? 10 : 15}px)`};
 		display: inline-block;
 		margin: ${props => props.smallScreen ? "2px" : "5px"};
+		padding-top: ${props => props.smallScreen ? "2px" : "4px"};
 		position: relative;
 	`
 
