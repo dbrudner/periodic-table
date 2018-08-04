@@ -23,6 +23,17 @@ export default props => {
 	const twoRowElements = [...periodicTable.elements.slice(56, 70), ...periodicTable.elements.slice(87, 101)]
 	const elements = [...periodicTable.elements.slice(0, 55), ...periodicTable.elements.slice(71, 86), ...periodicTable.elements.slice(102)]
 
+	console.log(elements);
+	// The dopest function I've ever written
+	const columns = elements.reduce((acc, element, i) => {
+		const column = 15 - (15 - i);
+		if (!acc || !acc[column]) return acc;
+		acc[column].push(element);
+		return acc;
+	}, Array(15).fill([]))
+
+	console.log(columns);
+
 	const renderElementsBlock = elements => elements.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)
 
 	return (
@@ -38,28 +49,28 @@ export default props => {
 				</Row>
 				<Row>
 					<Block>
-						{renderElementsBlock([...elements.slice(2,4)])}
+						{renderElementsBlock([...elements.slice(2, 4)])}
 					</Block>
 					<Block>
-						{renderElementsBlock([...elements.slice(4,10)])}
-					</Block>
-				</Row>
-				<Row>
-					<Block>
-						{renderElementsBlock([...elements.slice(10,12)])}
-					</Block>
-					<Block>
-						{renderElementsBlock([...elements.slice(12,18)])}
+						{renderElementsBlock([...elements.slice(4, 10)])}
 					</Block>
 				</Row>
 				<Row>
 					<Block>
-						{renderElementsBlock([...elements.slice(19,36)])}
+						{renderElementsBlock([...elements.slice(10, 12)])}
+					</Block>
+					<Block>
+						{renderElementsBlock([...elements.slice(12, 18)])}
 					</Block>
 				</Row>
 				<Row>
 					<Block>
-						{renderElementsBlock([...elements.slice(37,54)])}
+						{renderElementsBlock([...elements.slice(19, 36)])}
+					</Block>
+				</Row>
+				<Row>
+					<Block>
+						{renderElementsBlock([...elements.slice(37, 54)])}
 					</Block>
 				</Row>
 			</TableContainer>
@@ -67,4 +78,5 @@ export default props => {
 				{twoRowElements.map(element => <Element twoRow element={element} />)}
 			</div> */}
 		</div>
-)}
+	)
+}
