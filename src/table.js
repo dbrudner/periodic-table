@@ -20,15 +20,19 @@ const Block = styled.div`
 `
 // width: ${props => `calc(100vw/18 - 15px + ${props.blocks * 2}px + ${props.blocks * 5 * 2}px`})}
 
-
 const Divider = styled.div`
-	width: ${props => `calc(((100vw/18 - 15px) + 12px) * ${props.blocks})`};
+	width: ${props => `calc(((100vw/18 - ${props.smallScreen ? "10px" : "15px"}) + ${props.smallScreen ? "6px" : "12px"}) * ${props.blocks})`};
 `
 
 export default props => {
 	const twoRowElements = [...periodicTable.elements.slice(56, 70), ...periodicTable.elements.slice(87, 101)]
 	const elements = [...periodicTable.elements.slice(0, 55), ...periodicTable.elements.slice(71, 86), ...periodicTable.elements.slice(102)]
 	const renderElementsBlock = elements => elements.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)
+
+	const getMargin = () => {
+		if (window.innerWidth > 1200) return 5;
+		return 2;
+	}
 
 	return (
 		<div>
@@ -38,7 +42,7 @@ export default props => {
 						<Element openDetailedView={props.openDetailedView} element={elements[0]} />
 					</Block>
 					<Block>
-						<Divider blocks={16} />
+						<Divider smallScreen={window.innerWidth < 1200} blocks={16} />
 					</Block>
 					<Block>
 						<Element openDetailedView={props.openDetailedView} element={elements[1]} />
@@ -49,7 +53,7 @@ export default props => {
 						{renderElementsBlock([...elements.slice(2,4)])}
 					</Block>
 					<Block>
-						<Divider blocks={10} />
+						<Divider smallScreen={window.innerWidth < 1200} blocks={10} />
 					</Block>
 					<Block>
 						{renderElementsBlock([...elements.slice(4,10)])}
@@ -60,7 +64,7 @@ export default props => {
 						{renderElementsBlock([...elements.slice(10,12)])}
 					</Block>
 					<Block>
-						<Divider blocks={10} />
+						<Divider smallScreen={window.innerWidth < 1200} blocks={10} />
 					</Block>
 					<Block>
 						{renderElementsBlock([...elements.slice(12,18)])}
