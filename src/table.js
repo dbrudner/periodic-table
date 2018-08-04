@@ -26,10 +26,8 @@ const Divider = styled.div`
 `
 
 export default props => {
-
 	const twoRowElements = [...periodicTable.elements.slice(56, 70), ...periodicTable.elements.slice(87, 101)]
 	const elements = [...periodicTable.elements.slice(0, 55), ...periodicTable.elements.slice(71, 86), ...periodicTable.elements.slice(102)]
-	console.log(elements);
 	const renderElementsBlock = elements => elements.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)
 
 	return (
