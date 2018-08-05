@@ -1,20 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import Table from "./table";
 import DetailedView from "./detailed-view";
-import {ThemeProvider} from 'styled-components';
+import { ThemeProvider } from "styled-components";
 import theme from "./theme";
 import Legend from "./legend";
 import Quinn from "./quinn";
 
 class App extends Component {
-
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			detailedViewOpen: false,
 			detailedElement: {}
-		}
+		};
 	}
 
 	openDetailedView = detailedElement => {
@@ -23,7 +22,7 @@ class App extends Component {
 			detailedViewOpen: true,
 			detailedElement
 		});
-	}
+	};
 
 	render() {
 		return (

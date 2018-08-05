@@ -7,6 +7,6 @@ const theme = {
 	color6: "#FFF388",
 	color7: "#d7bc94",
 	color8: "#dbdbdb"
-}
+};
 
 export default theme;
