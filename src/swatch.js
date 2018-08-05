@@ -3,8 +3,8 @@ import styled from "styled-components";
 import getBgColor from "./get-bg-color";
 
 const Swatch = styled.div`
-	:first-child {
-		background-color: ${props => props.bgColor};
+	> div {
+		background-color: ${props => getBgColor(props)};
 		height: 1vw;
 		width: 1vw;
 	}
@@ -16,7 +16,7 @@ const Swatch = styled.div`
 
 export default props => {
 	return (
-		<Swatch {...props}>
+		<Swatch category={props.category}>
 			<div />
 			<div>{props.category}</div>
 		</Swatch>
