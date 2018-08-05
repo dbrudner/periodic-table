@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { categories } from "./constants";
-import Swatch from "./swatch";
+import LegendKey from "./legend-key";
 
 const Legend = styled.div`
 	position: fixed;
@@ -17,7 +17,7 @@ const Legend = styled.div`
 export default () => {
 	return (
 		<Legend smallScreen={window.innerWidth < 1200}>
-			{categories.map(category => <Swatch category={category} />)}
+			{categories.map(category => <LegendKey category={category} />)}
 		</Legend>
 	);
 };
