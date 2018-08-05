@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Legend from "./legend";
+import Info from "./info";
 import DetailedView from "./detailed-view";
 import Table from "./table";
 
@@ -24,7 +24,7 @@ export default class extends Component {
 	render() {
 		return (
 			<div style={{ position: "relative" }}>
-				<Legend />
+				<Info />
 				{this.state.detailedViewOpen ? (
 					<DetailedView {...this.state.detailedElement} />
 				) : (

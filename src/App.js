@@ -3,7 +3,6 @@ import Table from "./table";
 import DetailedView from "./detailed-view";
 import { ThemeProvider } from "styled-components";
 import theme from "./theme";
-import Legend from "./legend";
 import Quinn from "./quinn";
 
 class App extends Component {
