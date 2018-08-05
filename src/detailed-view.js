@@ -1,12 +1,5 @@
-import React from 'react';
+import React from "react";
 
-const DetailedView = props => {
-	console.log(props);
-	return (
-		<div>
-			{props.name}
-		</div>
-	);
-}
+const DetailedView = props => <div>{props.name}</div>;
 
 export default DetailedView;

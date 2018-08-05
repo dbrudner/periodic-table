@@ -19,12 +19,10 @@ const Legend = styled.div`
 	align-content: start; */
 `;
 
-export default () => {
-	return (
-		<Info smallScreen={window.innerWidth < 1200}>
-			<Legend>
-				{categories.map(category => <LegendKey category={category} />)}
-			</Legend>
-		</Info>
-	);
-};
+export default () => (
+	<Info smallScreen={window.innerWidth < 1200}>
+		<Legend>
+			{categories.map(category => <LegendKey category={category} />)}
+		</Legend>
+	</Info>
+);

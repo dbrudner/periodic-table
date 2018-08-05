@@ -10,17 +10,14 @@ const Swatch = styled.div`
 `;
 
 const SwatchContainer = styled.div`
-	/* width: calc((((100vw / 18 - 4px) * 10) + 36px) / 4) */
 	display: flex;
 	justify-content: left;
 	font-size: calc(6px + 6 * ((100vw - 320px) / 680));
 `;
 
-export default props => {
-	return (
-		<SwatchContainer>
-			<Swatch category={props.category} />
-			<div>{props.category}</div>
-		</SwatchContainer>
-	);
-};
+export default props => (
+	<SwatchContainer>
+		<Swatch category={props.category} />
+		<div>{props.category}</div>
+	</SwatchContainer>
+);
