@@ -11,11 +11,12 @@ const ElementContainer = styled.div`
 	/* margin: ${props => props.smallScreen ? "2px" : "5px"}; */
 	padding-top: ${props => props.smallScreen ? "2px" : "4px"};
 	position: relative;
+	background-color: ${props => props.category === "metalloid" ? "black" : ""};
 `
 
 export default props => {
 	const { openDetailedView, element } = props;
-	const { symbol, atomic_mass, number } = element;
+	const { symbol, atomic_mass, number, category } = element;
 	const width = window.innerWidth
 	
 	const handleClick = () => {
@@ -37,8 +38,10 @@ export default props => {
 		return "2px";
 	}
 
+	console.log(element);
+
 	return (
-		<ElementContainer smallScreen={window.innerWidth < 1200} onClick={handleClick}>
+		<ElementContainer {...element} smallScreen={window.innerWidth < 1200} onClick={handleClick}>
 			<div style={{fontSize: getFontSize()}}>{number}</div>
 			<div style={{fontSize: getLargeFontSize()}}>{symbol}</div>
 			<div style={{fontSize: getFontSize()}}>{(atomic_mass).toFixed(4)}</div>
