@@ -19,7 +19,7 @@ export default class extends Component {
 		}
 
 		if (!this.state.compound.length) {
-			return this.setState({
+			this.setState({
 				compound: [{ ...newElement, quantity: 1 }]
 			});
 		}
@@ -29,28 +29,24 @@ export default class extends Component {
 		});
 
 		if (isNewElement) {
-			return this.setState({
+			this.setState({
 				compound: [
 					...this.state.compound,
 					{ ...newElement, quantity: 1 }
 				]
 			});
-		} 
-		
-		else {
+		} else {
 			const compound = this.state.compound.map(element => {
 				if (element.name === newElement.name) {
 					return { ...element, quantity: element.quantity + 1 };
 				}
 				return element;
 			});
-	
-			return this.setState({
+
+			this.setState({
 				compound
 			});
 		}
-
-		
 	};
 
 	render() {
