@@ -4,14 +4,17 @@ import Element from "./element";
 import styled from "styled-components";
 
 const TableContainer = styled.div`
-	padding: 1rem;
-	border: 1px solid black;
+	padding: 0;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 `
 
 const Row = styled.div`
 	display: flex;
 	justify-content: left;
-	margin: 5px;
+	margin: 1px;
 `
 
 const Block = styled.div`
@@ -21,7 +24,7 @@ const Block = styled.div`
 // width: ${props => `calc(100vw/18 - 15px + ${props.blocks * 2}px + ${props.blocks * 5 * 2}px`})}
 
 const Divider = styled.div`
-	width: ${props => `calc(((100vw/18 - ${props.smallScreen ? "10px" : "15px"}) + ${props.smallScreen ? "6px" : "12px"}) * ${props.blocks})`};
+	width: ${props => `calc(((100vw/18 - ${props.smallScreen ? "4px" : "9px"}) + 4px) * ${props.blocks})`};
 `
 
 export default props => {

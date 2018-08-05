@@ -1,7 +1,17 @@
 import React, {Component } from 'react';
 import styled from "styled-components";
 
-
+const ElementContainer = styled.div`
+	border: 1px solid black;
+	text-align: center;
+	width: ${props => `calc(100vw/18 - ${props.smallScreen ? 4 : 9}px)`};
+	height: ${props => `calc(100vw/18 - ${props.smallScreen ? 4 : 9}px)`};
+	display: inline-block;
+	margin: 1px;
+	/* margin: ${props => props.smallScreen ? "2px" : "5px"}; */
+	padding-top: ${props => props.smallScreen ? "2px" : "4px"};
+	position: relative;
+`
 
 export default props => {
 	const { openDetailedView, element } = props;
@@ -26,17 +36,6 @@ export default props => {
 		if (width > 1200) return "5px";
 		return "2px";
 	}
-
-	const ElementContainer = styled.div`
-		border: 1px solid black;
-		text-align: center;
-		width: ${props => `calc(100vw/18 - ${props.smallScreen ? 10 : 15}px)`};
-		height: ${props => `calc(100vw/18 - ${props.smallScreen ? 10 : 15}px)`};
-		display: inline-block;
-		margin: ${props => props.smallScreen ? "2px" : "5px"};
-		padding-top: ${props => props.smallScreen ? "2px" : "4px"};
-		position: relative;
-	`
 
 	return (
 		<ElementContainer smallScreen={window.innerWidth < 1200} onClick={handleClick}>
