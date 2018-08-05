@@ -14,7 +14,6 @@ const TableContainer = styled.div`
 const Row = styled.div`
 	display: flex;
 	justify-content: left;
-	margin: 1px;
 `
 
 const Block = styled.div`
@@ -29,7 +28,7 @@ const Divider = styled.div`
 
 export default props => {
 	const twoRowElements = [...periodicTable.elements.slice(56, 70), ...periodicTable.elements.slice(87, 101)]
-	const elements = [...periodicTable.elements.slice(0, 55), ...periodicTable.elements.slice(71, 86), ...periodicTable.elements.slice(102)]
+	const elements = [...periodicTable.elements.slice(0, 56), ...periodicTable.elements.slice(70, 88), ...periodicTable.elements.slice(102, 118)]
 	const renderElementsBlock = elements => elements.map(element => <Element openDetailedView={props.openDetailedView} element={element} />)
 
 	const getMargin = () => {
@@ -90,7 +89,7 @@ export default props => {
 				</Row>
 				<Row>
 					<Block>
-						{renderElementsBlock([...elements.slice(87)])}
+						{renderElementsBlock([...elements.slice(72, 90)])}
 					</Block>
 				</Row>
 			</TableContainer>

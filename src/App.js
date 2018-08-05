@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import Table from "./table";
 import DetailedView from "./detailed-view";
+import {ThemeProvider} from 'styled-components';
+import theme from "./theme";
+import Legend from "./legend";
+import Quinn from "./quinn";
 
 class App extends Component {
 
@@ -18,13 +22,15 @@ class App extends Component {
 		this.setState({
 			detailedViewOpen: true,
 			detailedElement
-		})
+		});
 	}
 
 	render() {
 		return (
 			<div>
-				{this.state.detailedViewOpen ? <DetailedView {...this.state.detailedElement} /> : <Table openDetailedView={this.openDetailedView} />}
+				<ThemeProvider theme={theme}>
+					<Quinn />
+				</ThemeProvider>
 			</div>
 		);
 	}

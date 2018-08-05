@@ -1,6 +1,28 @@
 import React, {Component } from 'react';
 import styled from "styled-components";
 
+const getBgColor = props => {
+
+	switch (props.category) {
+		case "metalloid":
+			return props.theme.color1
+		case "noble gas":
+			return props.theme.color3
+		case "diatomic nonmetal":
+			return props.theme.color4
+		case "polyatomic nonmetal":
+			return props.theme.color2
+		case "alkali metal":
+			return props.theme.color5
+		case "alkaline earth metal":
+			return props.theme.color6
+		case "post-transition metal":
+			return props.theme.color7
+		case "transition metal":
+			return props.theme.color8
+	}
+}
+
 const ElementContainer = styled.div`
 	border: 1px solid black;
 	text-align: center;
@@ -11,14 +33,15 @@ const ElementContainer = styled.div`
 	/* margin: ${props => props.smallScreen ? "2px" : "5px"}; */
 	padding-top: ${props => props.smallScreen ? "2px" : "4px"};
 	position: relative;
-	background-color: ${props => props.category === "metalloid" ? "black" : ""};
+	background-color: ${props => getBgColor(props)};
+	color: ${props => props.category === "diatomic nonmetal" ? "white" : ""};
 `
 
 export default props => {
 	const { openDetailedView, element } = props;
 	const { symbol, atomic_mass, number, category } = element;
 	const width = window.innerWidth
-	
+
 	const handleClick = () => {
 		// openDetailedView(element);
 	}
