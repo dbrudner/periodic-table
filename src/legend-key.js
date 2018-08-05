@@ -6,6 +6,7 @@ const Swatch = styled.div`
 	background-color: ${props => getBgColor(props)};
 	height: 1vw;
 	width: 1vw;
+	margin: 3px;
 `;
 
 const SwatchContainer = styled.div`
