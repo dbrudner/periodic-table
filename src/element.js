@@ -14,15 +14,16 @@ const ElementContainer = styled.div`
 	position: relative;
 	background-color: ${props => getBgColor(props)};
 	color: ${props => (props.category === "diatomic nonmetal" ? "white" : "")};
+	cursor: pointer;
 `;
 
 export default props => {
-	const { openDetailedView, element } = props;
+	const { handleElementClick, element } = props;
 	const { symbol, atomic_mass, number, category } = element;
 	const width = window.innerWidth;
 
 	const handleClick = () => {
-		// openDetailedView(element);
+		handleElementClick(element);
 	};
 
 	const getFontSize = () => {
@@ -39,8 +40,6 @@ export default props => {
 		if (width > 1200) return "5px";
 		return "2px";
 	};
-
-	console.log(element);
 
 	return (
 		<ElementContainer

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import Info from "./info";
-import DetailedView from "./detailed-view";
 import Table from "./table";
 
 export default class extends Component {
@@ -8,28 +7,62 @@ export default class extends Component {
 		super(props);
 
 		this.state = {
-			detailedViewOpen: false,
-			detailedElement: {}
+			detailedElement: {},
+			mode: "build",
+			compound: []
 		};
 	}
 
-	openDetailedView = detailedElement => {
-		console.log(detailedElement);
-		this.setState({
-			detailedViewOpen: true,
-			detailedElement
+	handleElementClick = newElement => {
+		if (this.state.mode === "info") {
+			return this.setState({ detailedElement: newElement });
+		}
+
+		if (!this.state.compound.length) {
+			return this.setState({
+				compound: [{ ...newElement, quantity: 1 }]
+			});
+		}
+
+		const isNewElement = this.state.compound.some(ele => {
+			console.log(ele);
+			return true;
+			// return ele.name === newElement.name;
+		});
+
+		console.log("compound", this.state.compound);
+		console.log({ isNewElement });
+
+		if (isNewElement) {
+			return this.setState({
+				compound: [
+					...this.state.compound,
+					{ ...newElement, quantity: 1 }
+				]
+			});
+		}
+
+		const compound = this.state.compound.map(element => {
+			console.log(element.name, newElement.name);
+			if (element.name === newElement.name) {
+				return { ...element, quantity: element.quantity + 1 };
+			}
+			return element;
+		});
+
+		return this.setState({
+			compound
 		});
 	};
 
 	render() {
 		return (
 			<div style={{ position: "relative" }}>
-				<Info />
-				{this.state.detailedViewOpen ? (
-					<DetailedView {...this.state.detailedElement} />
-				) : (
-					<Table openDetailedView={this.openDetailedView} />
-				)}
+				<Info
+					{...this.state}
+					setMode={mode => this.setState({ mode })}
+				/>
+				<Table handleElementClick={this.handleElementClick} />
 			</div>
 		);
 	}

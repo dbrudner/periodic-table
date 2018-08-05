@@ -39,7 +39,7 @@ export default props => {
 	const renderElementsBlock = elements =>
 		elements.map(element => (
 			<Element
-				openDetailedView={props.openDetailedView}
+				handleElementClick={props.handleElementClick}
 				element={element}
 			/>
 		));
@@ -55,7 +55,7 @@ export default props => {
 				<Row>
 					<Block>
 						<Element
-							openDetailedView={props.openDetailedView}
+							handleElementClick={props.handleElementClick}
 							element={elements[0]}
 						/>
 					</Block>
@@ -67,7 +67,7 @@ export default props => {
 					</Block>
 					<Block>
 						<Element
-							openDetailedView={props.openDetailedView}
+							handleElementClick={props.handleElementClick}
 							element={elements[1]}
 						/>
 					</Block>
