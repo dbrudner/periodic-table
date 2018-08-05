@@ -14,10 +14,18 @@ export default props => {
 		});
 	};
 
+	const getMolarMass = () =>
+		compound
+			.reduce((acc, element) => {
+				return acc + element.atomic_mass * element.quantity;
+			}, 0)
+			.toFixed(4);
+
 	return (
 		<div>
 			Compound
 			<div style={{ marginTop: "5px" }}>{renderCompoundName()}</div>
+			<div>{getMolarMass()}</div>
 		</div>
 	);
 };
