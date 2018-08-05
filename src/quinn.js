@@ -24,14 +24,9 @@ export default class extends Component {
 			});
 		}
 
-		const isNewElement = this.state.compound.some(ele => {
-			console.log(ele);
-			return true;
-			// return ele.name === newElement.name;
+		const isNewElement = this.state.compound.every(ele => {
+			return ele.name !== newElement.name;
 		});
-
-		console.log("compound", this.state.compound);
-		console.log({ isNewElement });
 
 		if (isNewElement) {
 			return this.setState({
@@ -40,22 +35,26 @@ export default class extends Component {
 					{ ...newElement, quantity: 1 }
 				]
 			});
+		} 
+		
+		else {
+			const compound = this.state.compound.map(element => {
+				if (element.name === newElement.name) {
+					return { ...element, quantity: element.quantity + 1 };
+				}
+				return element;
+			});
+	
+			return this.setState({
+				compound
+			});
 		}
 
-		const compound = this.state.compound.map(element => {
-			console.log(element.name, newElement.name);
-			if (element.name === newElement.name) {
-				return { ...element, quantity: element.quantity + 1 };
-			}
-			return element;
-		});
-
-		return this.setState({
-			compound
-		});
+		
 	};
 
 	render() {
+		console.log(this.state.compound);
 		return (
 			<div style={{ position: "relative" }}>
 				<Info
