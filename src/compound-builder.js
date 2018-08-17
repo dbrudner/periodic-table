@@ -8,6 +8,7 @@ export default class extends Component {
 			const quantity = element.quantity > 1 ? element.quantity : "";
 			return cmpd + element.symbol + quantity;
 		}, "");
+
 		const url = `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/fastformula/${compoundString}/cids/json`;
 		const res = await fetch(url);
 		const data = await res.json();
