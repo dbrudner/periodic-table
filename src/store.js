@@ -31,12 +31,50 @@ const parseCompound = (compound, newElement) => {
 	}
 };
 
+const hasCarbon = compound =>
+	compound.some(element => element.name.toLowerCase() === "carbon");
+
+const sortCompound = compound => {
+	console.log(compound);
+	// if (hasCarbon(compound)) {
+	return compound.sort((a, b) => {
+		console.log(a.name);
+		if (a.name.toLowerCase() === "carbon") {
+			return -1;
+		}
+
+		if (b.name.toLowerCase() === "carbon") {
+			return 1;
+		}
+
+		if (a.name.toLowerCase() === "hydrogen") {
+			return -1;
+		}
+
+		if (b.name.toLowerCase() === "hydrogen") {
+			return 1;
+		}
+
+		if (a.symbol > b.symbol) {
+			return 1;
+		}
+
+		if (a.symbol < b.symbol) {
+			return -1;
+		}
+
+		return 0;
+	});
+	// }
+};
+
 export const reducer = (state = defaultState, action) => {
 	if (action.type === ELEMENT_ADDED) {
 		return {
 			...state,
-			compound: parseCompound(state.compound, action.payload)
-			// compound: [...state.compound, parseCompound(action.payload)]
+			compound: sortCompound(
+				parseCompound(state.compound, action.payload)
+			)
 		};
 	}
 
