@@ -4,8 +4,10 @@ import { categories } from "./constants";
 import LegendKey from "./legend-key";
 import DetailedInfo from "./detailed-info";
 import CompoundBuilder from "./compound-builder";
+import { connect } from "react-redux";
+import { BUILDER_SELECTED, INFO_SELECTED } from "./store";
 
-const Info = styled.div`
+const InfoContainer = styled.div`
 	display: flex;
 	justify-content: space-around;
 	position: fixed;
@@ -28,31 +30,40 @@ const Button = styled.button`
 	border-style: ${props => (props.active ? "inset" : "")};
 `;
 
-export default props => (
-	<Info smallScreen={window.innerWidth < 1200}>
-		<div>
-			<Legend>
-				{categories.map(category => <LegendKey category={category} />)}
-			</Legend>
-		</div>
-		<div>
-			<Button
-				active={props.mode === "info"}
-				onClick={() => props.setMode("info")}
-			>
-				Info
-			</Button>
-			<Button
-				active={props.mode === "build"}
-				onClick={() => props.setMode("build")}
-			>
-				Build Compound
-			</Button>
-			{props.mode === "info" ? (
-				<DetailedInfo {...props.detailedElement} />
-			) : (
-				<CompoundBuilder compound={props.compound} />
-			)}
-		</div>
-	</Info>
-);
+const Info = props => {
+	console.log(props);
+	return (
+		<InfoContainer smallScreen={window.innerWidth < 1200}>
+			<div>
+				<Legend>
+					{categories.map(category => (
+						<LegendKey category={category} />
+					))}
+				</Legend>
+			</div>
+			<div>
+				<Button
+					active={props.mode === INFO_SELECTED}
+					onClick={() => props.dispatch({ type: INFO_SELECTED })}
+				>
+					Info
+				</Button>
+				<Button
+					active={props.mode === BUILDER_SELECTED}
+					onClick={() => props.dispatch({ type: BUILDER_SELECTED })}
+				>
+					Build Compound
+				</Button>
+				{props.mode === INFO_SELECTED ? (
+					<DetailedInfo {...props.detailedElement} />
+				) : (
+					<CompoundBuilder compound={props.compound} />
+				)}
+			</div>
+		</InfoContainer>
+	);
+};
+
+export default connect(state => {
+	return { mode: state.mode, detailedElement: state.detailedElement };
+})(Info);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 
-export default class extends Component {
+class CompoundBuilder extends Component {
 	state = { results: [] };
 
 	search = async () => {
@@ -19,7 +20,9 @@ export default class extends Component {
 		// 	console.log(data);
 		// });
 
-		const urlel = await `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${data.IdentifierList.CID[0]}/classification/JSON?classification_type=original`;
+		const urlel = await `https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/${
+			data.IdentifierList.CID[0]
+		}/classification/JSON?classification_type=original`;
 		const resel = await fetch(url);
 		const datael = await res.json();
 		console.log(datael);
@@ -37,6 +40,7 @@ export default class extends Component {
 	};
 
 	getMolarMass = () => {
+		console.log(this.props.compound);
 		return this.props.compound
 			.reduce((acc, element) => {
 				return acc + element.atomic_mass * element.quantity;
@@ -48,10 +52,14 @@ export default class extends Component {
 		return (
 			<div>
 				Compound
-				<div style={{ marginTop: "5px" }}>{this.renderCompoundName()}</div>
+				<div style={{ marginTop: "5px" }}>
+					{this.renderCompoundName()}
+				</div>
 				<div>{this.getMolarMass()}</div>
 				<button onClick={this.search}>Search</button>
 			</div>
 		);
 	}
 }
+
+export default connect(state => state)(CompoundBuilder);

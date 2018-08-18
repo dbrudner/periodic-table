@@ -1,6 +1,13 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 import getBgColor from "./get-bg-color";
+import { connect } from "react-redux";
+import {
+	ELEMENT_ADDED,
+	INFO_SELECTED,
+	BUILDER_SELECTED,
+	ELEMENT_SELECTED
+} from "./store";
 
 const ElementContainer = styled.div`
 	border: 1px solid black;
@@ -17,13 +24,19 @@ const ElementContainer = styled.div`
 	cursor: pointer;
 `;
 
-export default props => {
-	const { handleElementClick, element } = props;
+const element = props => {
+	const { element } = props;
 	const { symbol, atomic_mass, number, category } = element;
 	const width = window.innerWidth;
 
 	const handleClick = () => {
-		handleElementClick(element);
+		if (props.mode === INFO_SELECTED) {
+			props.dispatch({ type: ELEMENT_SELECTED, payload: element });
+		}
+
+		if (props.mode === BUILDER_SELECTED) {
+			props.dispatch({ type: ELEMENT_ADDED, payload: element });
+		}
 	};
 
 	const getFontSize = () => {
@@ -55,3 +68,7 @@ export default props => {
 		</ElementContainer>
 	);
 };
+
+export default connect(state => {
+	return { mode: state.mode };
+})(element);
