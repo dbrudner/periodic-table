@@ -30,39 +30,36 @@ const Button = styled.button`
 	border-style: ${props => (props.active ? "inset" : "")};
 `;
 
-const Info = props => {
-	console.log(props);
-	return (
-		<InfoContainer smallScreen={window.innerWidth < 1200}>
-			<div>
-				<Legend>
-					{categories.map(category => (
-						<LegendKey category={category} />
-					))}
-				</Legend>
-			</div>
-			<div>
-				<Button
-					active={props.mode === INFO_SELECTED}
-					onClick={() => props.dispatch({ type: INFO_SELECTED })}
-				>
-					Info
-				</Button>
-				<Button
-					active={props.mode === BUILDER_SELECTED}
-					onClick={() => props.dispatch({ type: BUILDER_SELECTED })}
-				>
-					Build Compound
-				</Button>
-				{props.mode === INFO_SELECTED ? (
-					<DetailedInfo {...props.detailedElement} />
-				) : (
-					<CompoundBuilder compound={props.compound} />
-				)}
-			</div>
-		</InfoContainer>
-	);
-};
+const Info = props => (
+	<InfoContainer smallScreen={window.innerWidth < 1200}>
+		<div>
+			<Legend>
+				{categories.map(category => (
+					<LegendKey category={category} />
+				))}
+			</Legend>
+		</div>
+		<div>
+			<Button
+				active={props.mode === INFO_SELECTED}
+				onClick={() => props.dispatch({ type: INFO_SELECTED })}
+			>
+				Info
+			</Button>
+			<Button
+				active={props.mode === BUILDER_SELECTED}
+				onClick={() => props.dispatch({ type: BUILDER_SELECTED })}
+			>
+				Build Compound
+			</Button>
+			{props.mode === INFO_SELECTED ? (
+				<DetailedInfo {...props.detailedElement} />
+			) : (
+				<CompoundBuilder compound={props.compound} />
+			)}
+		</div>
+	</InfoContainer>
+);
 
 export default connect(state => {
 	return { mode: state.mode, detailedElement: state.detailedElement };

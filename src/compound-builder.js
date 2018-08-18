@@ -49,6 +49,7 @@ class CompoundBuilder extends Component {
 	};
 
 	render() {
+		console.log(this.props);
 		return (
 			<div>
 				Compound
@@ -62,4 +63,32 @@ class CompoundBuilder extends Component {
 	}
 }
 
-export default connect(state => state)(CompoundBuilder);
+const getCharge = compound => {
+	return compound.reduce((charge, element) => {
+		const valence = element.shells[element.shells.length - 1];
+
+		if (element.name.toLowerCase() === "hydrogen") {
+			return charge + 1;
+		}
+
+		if (element.name.toLowerCase() === "helium") {
+			return charge;
+		}
+
+		if (valence < 4) {
+			console.log(element.name);
+			return charge - valence;
+		}
+
+		if (valence > 4) {
+			return charge - (8 - valence);
+		}
+
+		return charge;
+	}, 0);
+};
+
+export default connect(state => ({
+	compound: state.compound,
+	charge: getCharge(state.compound)
+}))(CompoundBuilder);
